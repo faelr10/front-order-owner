@@ -1,0 +1,204 @@
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  /* border: 4px solid black; */
+}
+
+.modal-content {
+  /* border: 1px solid black; */
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(132, 210, 238, 0.774);
+  max-width: 560px;
+  width: 100%;
+  height: 80%;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal.show {
+  display: flex;
+  animation: modalFadeIn 0.15s ease-out;
+}
+
+/* DATA MODAL */
+.status-model-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 90%;
+  height: 100%;
+  /* border: 1px solid black; */
+}
+
+.status-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 95%;
+  height: 18%;
+  text-decoration: underline;
+}
+
+.status-id {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 95%;
+  height: 10%;
+  font-size: 15px;
+  /* border: 1px solid black; */
+}
+
+.status-value {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 95%;
+  height: 10%;
+
+  font-size: 15px;
+  /* border: 1px solid black; */
+}
+
+/* BOX CONFIRME CHANGE STATUS */
+.data-status-confirmation {
+  background: rgba(0, 0, 0, 0.5);
+
+  /* background-color: #4caf50;  */
+  color: #fff; /* Cor do texto branco */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  font-size: 18px;
+}
+
+.data-status-confirmation:hover {
+  background-color: #00000095; /* Cor de fundo verde mais escura ao passar o mouse */
+  cursor: pointer;
+}
+
+/* Adicione transição suave para a mudança de cor */
+.data-status-confirmation {
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo para os botões "Sim" e "Não" */
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.confirmation-button-yes {
+  background-color: #3498dba2; /* Cor de fundo azul */
+  color: #fff; /* Cor do texto branco */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+.confirmation-button-no {
+  background-color: #db3434a6; /* Cor de fundo azul */
+  color: #fff; /* Cor do texto branco */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.confirmation-button-yes:hover {
+  background-color: #2980b9; /* Cor de fundo azul mais escura ao passar o mouse */
+}
+.confirmation-button-no:hover {
+  background-color: #b92929; /* Cor de fundo azul mais escura ao passar o mouse */
+}
+
+/* BUTTONS STATUS TYPES */
+.data-status-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 95%;
+  height: 15%;
+  font-size: 15px;
+  /* border: 1px solid black; */
+}
+
+.data-status-button-processing,
+.data-status-button-completed {
+  height: 50%;
+  font-size: 14px;
+  color: #353535;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.data-status-button-processing {
+  background-color: #ffd966; /* Vermelho mais claro */
+}
+
+.data-status-button-processing:hover {
+  background-color: #ffcc00;
+}
+
+.data-status-button-completed {
+  padding: 5px 15px;
+  background-color: #a5d6a7;
+}
+
+.data-status-button-completed:hover {
+  background-color: #4caf50;
+}
+
+/* BUTTONS CLOSED MODAL */
+.closed-button-modal {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.closed-button-modal:hover {
+  background-color: #0056b3;
+}

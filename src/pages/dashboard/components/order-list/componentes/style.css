@@ -1,0 +1,154 @@
+.box-list {
+  border: 1px solid silver;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 95%;
+  height: 90%;
+}
+
+.column-title-list {
+  border-bottom: 1px solid silver;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 40px;
+  font-size: 13px;
+}
+
+.title-id {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.title-name {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 27%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.title-valor {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.title-status {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.column-data-list{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 40px;
+  font-size: 13px;
+}
+.even-row {
+  background-color: #e0dfdf; /* Cinza claro */
+}
+
+.data-id {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+
+  text-decoration: underline;
+  color: blue;
+}
+
+.data-name {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 27%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.data-valor {
+  /* border: 1px solid silver; */
+
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.data-status {
+  /* border: 1px solid silver;  */
+
+  height: 100%;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.data-status-button {
+  padding: 5px 15px;
+  font-size: 14px;
+  color: #353535;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #ff4d4d; /* Vermelho mais claro */
+  transition: background-color 0.3s ease;
+}
+
+.data-status-button:hover {
+  background-color: #ff6666; /* Vermelho mais escuro para o efeito hover padrão */
+}
+
+/* Efeito hover específico para o status 'Pendente' */
+.data-status-button[value="Pendente"]:hover {
+  background-color: #e60000; /* Vermelho mais escuro para 'Pendente' */
+}
+
+/* Efeito hover específico para o status 'Em andamento' */
+.data-status-button[value="Em andamento"]:hover {
+  background-color: #ffcc00; /* Amarelo mais escuro para 'Em andamento' */
+}
+
+/* Efeito hover específico para o status 'Concluído' */
+.data-status-button[value="Concluído"]:hover {
+  background-color: #4caf50; /* Verde mais escuro para 'Concluído' */
+}

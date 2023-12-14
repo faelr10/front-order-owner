@@ -1,0 +1,11 @@
+.lateral-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 22%;
+  height: 95%;
+  background-color: rgba(224, 224, 255, 0.244);
+  border-radius: 10px;
+
+}
