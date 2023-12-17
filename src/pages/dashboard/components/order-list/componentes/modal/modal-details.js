@@ -31,7 +31,10 @@ const ModalDetails = ({ orderId, closeModal }) => {
     <div className={`modal ${orders_list ? "show" : ""}`}>
       {orders_list ? (
         <>
-          <div className="modal-content">
+          <div
+            className="modal-content"
+            style={{ maxHeight: "80vh", overflowY: "auto" }}
+          >
             <div className="detail-model-box">
               <div className="details-title">
                 Detalhes do Pedido&nbsp; <CiViewList />
@@ -41,7 +44,7 @@ const ModalDetails = ({ orderId, closeModal }) => {
                   <PiListNumbersFill />
                   &nbsp; Nº do Pedido:&nbsp;{" "}
                 </strong>{" "}
-                {orders_list.numer_order_id}
+                {orders_list.number_order_id}
               </div>
               <div className="details-name">
                 <strong>
@@ -55,26 +58,29 @@ const ModalDetails = ({ orderId, closeModal }) => {
                   <RiMoneyDollarCircleLine />
                   &nbsp; Valor:&nbsp;{" "}
                 </strong>{" "}
-                {orders_list.price}
+                R$ {orders_list.price}
               </div>
               <div className="details-product" style={{ textAlign: "left" }}>
                 <strong>
                   <CiViewList /> &nbsp;Detalhes:&nbsp;{" "}
                 </strong>
                 <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
-                  <li style={{ marginBottom: "5px" }}>
-                    &nbsp;1x {orders_list.Product.name}
-                  </li>
+                  {orders_list.OrderProduct.map((product, index) => (
+                    <li key={index} style={{ marginBottom: "5px" }}>
+                      &nbsp;<strong>{`${product.quantity}x`}</strong>
+                      &nbsp;&nbsp;{`${product.product.name}`}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              <div className="details-description">
+              {/* <div className="details-description">
                 <strong>
                   <MdOutlineDescription />
                   &nbsp; Descrição:&nbsp;&nbsp;
                 </strong>
                 Muito molho especial!
-              </div>
+              </div> */}
               <button
                 className="closed-button-modal"
                 onClick={handleCloseModal}

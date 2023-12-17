@@ -3,12 +3,10 @@ import "./style.css";
 import { AiTwotoneEye } from "react-icons/ai";
 import axios from "axios";
 import { io } from "socket.io-client";
-import ModalStatus from "./modal/modal-status";
 import ModalDetails from "./modal/modal-details";
 
 export function BoxList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalStatusOpen, setIsModalStatusOpen] = useState(false);
   const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [orders_list, setOrders] = useState([]);
 
@@ -36,8 +34,11 @@ export function BoxList() {
     newSocket.on("new_order", (data) => {
       setOrders((prevOrders) => [
         {
-          order_id: data.order_id,
-          account_name: data.account_name,
+          number_order_id: data.order_id,
+          Account: {
+            name: data.Account.name,
+          },
+          price: data.price,
           status: data.status,
         },
         ...prevOrders,
@@ -55,6 +56,20 @@ export function BoxList() {
     };
   }, []);
 
+  const handleStatusChange = (orderId, newStatus) => {
+    axios.patch(`http://localhost:3005/order/${orderId}`, {
+      status: newStatus,
+    });
+
+    setOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.number_order_id === orderId
+          ? { ...order, status: newStatus }
+          : order
+      )
+    );
+  };
+
   const getStatusButtonColor = (status) => {
     switch (status.toLowerCase()) {
       case "pending":
@@ -68,21 +83,6 @@ export function BoxList() {
     }
   };
 
-  const handleUpdateOrder = () => {
-    setIsModalStatusOpen(false);
-    setTimeout(()=>{
-      axios
-      .get("http://localhost:3005/order")
-      .then((response) => {
-        setOrders(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    },1000)
-    
-  };
-
   return (
     <div className="box-list">
       <div className="column-title-list">
@@ -91,54 +91,72 @@ export function BoxList() {
         <p className="title-valor">Valor</p>
         <p className="title-status">Status</p>
       </div>
-
-      {orders_list.map((order, index) => {
-        const rowClass = index % 2 === 0 ? "even-row" : "odd-row";
-
-        return (
-          <div className={`column-data-list ${rowClass}`} key={index}>
-            <button
-              type="button"
-              className="data-id"
-              onClick={() => {
-                setIsModalOpen(true);
-                setSelectedOrderId(order.numer_order_id);
-              }}
-            >
-              <AiTwotoneEye /> &nbsp;&nbsp;{order.numer_order_id}
-            </button>
-
-            <p className="data-name">{order.account_name}</p>
-            <p className="data-valor">{order.price}</p>
-            <p className="data-status">
-              <input
-                className="data-status-button"
+      <div
+        className="box-all-list"
+        style={{ maxHeight: "400px", overflowY: "auto" }}
+      >
+        {orders_list.map((order, index) => {
+          const rowClass = index % 2 === 0 ? "even-row" : "odd-row";
+          return (
+            <div className={`column-data-list ${rowClass}`} key={index}>
+              <button
                 type="button"
-                value={order.status}
-                style={{
-                  backgroundColor: getStatusButtonColor(order.status),
-                }}
+                className="data-id"
                 onClick={() => {
-                  setIsModalStatusOpen(true);
-                  setSelectedOrderId(order.numer_order_id);
+                  setIsModalOpen(true);
+                  setSelectedOrderId(order.number_order_id);
                 }}
-              />
-            </p>
-          </div>
-        );
-      })}
+              >
+                <AiTwotoneEye /> &nbsp;&nbsp;{order.number_order_id}
+              </button>
 
+              <p className="data-name">{order.Account.name}</p>
+              <p className="data-valor">R$ {order.price}</p>
+              <div className="data-status">
+                <select
+                  style={{
+                    backgroundColor: getStatusButtonColor(order.status),
+                  }}
+                  className="option-id"
+                  value={order.status}
+                  onChange={(e) =>
+                    handleStatusChange(order.number_order_id, e.target.value)
+                  }
+                >
+                  <option
+                    value="PENDING"
+                    className={`option-class-pending ${
+                      order.status === "PENDING" ? "selected" : ""
+                    }`}
+                  >
+                    PENDING
+                  </option>
+                  <option
+                    value="PROCESSING"
+                    className={`option-class-processing ${
+                      order.status === "PROCESSING" ? "selected" : ""
+                    }`}
+                  >
+                    PROCESSING
+                  </option>
+                  <option
+                    value="COMPLETED"
+                    className={`option-class-completed ${
+                      order.status === "COMPLETED" ? "selected" : ""
+                    }`}
+                  >
+                    COMPLETED
+                  </option>
+                </select>
+              </div>
+            </div>
+          );
+        })}
+      </div>
       {isModalOpen && (
         <ModalDetails
           orderId={selectedOrderId}
           closeModal={() => setIsModalOpen(false)}
-        />
-      )}
-
-      {isModalStatusOpen && (
-        <ModalStatus
-          orderId={selectedOrderId}
-          closeModal={() => handleUpdateOrder()}
         />
       )}
     </div>
